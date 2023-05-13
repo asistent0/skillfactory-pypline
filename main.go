@@ -22,6 +22,7 @@ func main() {
 				case <-done:
 					return
 				case output <- p.(int):
+					fmt.Println("init - output")
 				}
 			})
 		}()
@@ -40,9 +41,11 @@ func main() {
 					if !isChannelOpen {
 						return
 					}
+					fmt.Println("plusNumber - input - all", i)
 					if i < 0 {
 						continue
 					}
+					fmt.Println("plusNumber - input - select", i)
 					select {
 					case plusedStream <- i:
 					case <-done:
@@ -67,9 +70,11 @@ func main() {
 					if !isChannelOpen {
 						return
 					}
+					fmt.Println("multiples3 - input - all", i)
 					if i == 0 || i%3 != 0 {
 						continue
 					}
+					fmt.Println("multiples3 - input - select", i)
 					select {
 					case multiples3edStream <- i:
 					case <-done:
